@@ -1,0 +1,15 @@
+{
+  "name": "ejercitacion",
+  "version": "1.0.0",
+  "description": "Ejercicio de package.json",
+  "main": "leyendoArchivos.js",
+  "dependencies": {
+    "pretty-ms": "^7.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "saludar": "echo \"Hola, este es mi primer script!\" && exit 1"
+  },
+  "author": "DanielaCapponi",
+  "license": "ISC"
+}
