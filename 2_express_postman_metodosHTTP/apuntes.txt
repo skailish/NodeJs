@@ -15,7 +15,7 @@ GET /maps HTTP/1.1
 Host: www.google.comunicamosUser-Agent: Mozilla/5.0
 Accept-Language: en-comunicamosUser
 GET: pedir información
-POST: pedir información
+POST: enviar información
 
 --- Respuesta:
 HTTP/1.1 200 OK

@@ -78,6 +78,39 @@ app.post("/gatitos", (req, res) => {
   );
 });
 
+// PUT y DELETE
+app.post("/gatitos:id", (req, res) => {
+  // Primero determino toda la info a agregar
+  fs.readFile(`${__dirname}/assets/cats.json`, (err, data) => {
+    //   Obtengo lo que ya existe
+    const dataJSON = JSON.parse(data);
+    // Determino el id que me llega
+    const id = Number(req.params.id);
+
+    // Filtro el resultado sacando lo que me envía
+    const resultadoFiltrado = dataJSON.map((gato) => {
+      if (gato.id === id) {
+        return gato;
+      }
+    });
+  });
+  // Ahora actualizo la data
+  fs.writeFile(
+    `${__dirname}/assets/cats.json`,
+    JSON.stringify(resultadoFiltrado),
+    (err) => {
+      // Éxito al grabar? 201
+      res.status(201).json({
+        status: "success",
+        data: {
+          resultadoFiltrado,
+          createdAt: new Date(),
+        },
+      });
+    }
+  );
+});
+
 // Determino un puerto
 const port = 8080;
 
