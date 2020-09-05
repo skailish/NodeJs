@@ -60,55 +60,71 @@ app.post("/gatitos", (req, res) => {
     nuevoGato.id = dataJSON.length;
     //   Le sumo mi nuevoGato a lo que ya tengo
     dataJSON.push(nuevoGato);
+    // Ahora agrego la data
+    fs.writeFile(
+      `${__dirname}/assets/cats.json`,
+      JSON.stringify(dataJSON),
+      (err) => {
+        // Éxito al grabar? 201
+        res.status(201).json({
+          status: "success",
+          data: {
+            nuevoGato,
+            createdAt: new Date(),
+          },
+        });
+      }
+    );
   });
-  // Ahora agrego la data
-  fs.writeFile(
-    `${__dirname}/assets/cats.json`,
-    JSON.stringify(dataJSON),
-    (err) => {
-      // Éxito al grabar? 201
-      res.status(201).json({
-        status: "success",
-        data: {
-          nuevoGato,
-          createdAt: new Date(),
-        },
-      });
-    }
-  );
 });
 
 // PUT y DELETE
-app.post("/gatitos:id", (req, res) => {
-  // Primero determino toda la info a agregar
+// -> PUT
+app.put("/gatitos", (req, res) => {
   fs.readFile(`${__dirname}/assets/cats.json`, (err, data) => {
-    //   Obtengo lo que ya existe
     const dataJSON = JSON.parse(data);
-    // Determino el id que me llega
-    const id = Number(req.params.id);
+    const gatoEditado = req.body;
 
-    // Filtro el resultado sacando lo que me envía
-    const resultadoFiltrado = dataJSON.map((gato) => {
-      if (gato.id === id) {
-        return gato;
-      }
+    const newJson = dataJSON.map((gato) => {
+      gato = gato.id == gatoEditado.id ? gatoEditado : gato;
+      return gato;
     });
+    // Ahora actualizo la data
+
+    fs.writeFile(
+      `${__dirname}/assets/cats.json`,
+      JSON.stringify(newJson),
+      (err) => {
+        // Éxito al grabar? 201
+        res.status(201).json({
+          status: "success",
+          data: {
+            newJson,
+            editedAt: new Date(),
+          },
+        });
+      }
+    );
   });
-  // Ahora actualizo la data
-  fs.writeFile(
-    `${__dirname}/assets/cats.json`,
-    JSON.stringify(resultadoFiltrado),
-    (err) => {
-      // Éxito al grabar? 201
-      res.status(201).json({
-        status: "success",
-        data: {
-          resultadoFiltrado,
-          createdAt: new Date(),
-        },
-      });
-    }
-  );
+});
+
+// -> DELETE
+app.delete("/gatitos/:id", (req, res) => {
+  const id = Number(req.params.id);
+  fs.readFile(`${__dirname}/assets/cats.json`, (err, data) => {
+    const dataJSON = JSON.parse(data);
+    const gatoNombre = dataJSON[id].name;
+    const resultadoFiltrado = dataJSON.filter((gato) => gato.id !== id);
+
+    // Ahora actualizo la data
+    fs.writeFile(
+      `${__dirname}/assets/cats.json`,
+      JSON.stringify(resultadoFiltrado),
+      (err) => {
+        res.status(201).send(`Borraste al gatito ${gatoNombre}, cuánta maldad`);
+      }
+    );
+  });
 });
 
 // Determino un puerto

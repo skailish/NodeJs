@@ -30,23 +30,13 @@
     "disponible": false
   },
   {
-    "id": 3,
-    "name": "Wosito",
-    "shortDesc": "Vivio toda su vida en la calle y todavia se asombra de cosas como estufas y escaleras.",
+    "id": 5,
+    "name": "Alaska",
+    "shortDesc": "Tiene 3 años.",
     "longDesc": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit libero dolorum aliquam error expedita distinctio porro ducimus ex repellendus laboriosam. Sequi, doloribus autem? Unde commodi assumenda consequatur ratione numquam distinctio nihil blanditiis quae debitis sed eligendi modi architecto omnis aspernatur officia molestiae, vero nemo a quibusdam? Voluptatum eveniet blanditiis impedit.",
-    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkqkcBuVxZdrxWFYiEhoR3SpIioYCMesijUKHfjh7pTz-ctaf5&s",
-    "colores": ["rayado"],
-    "sexo": "m",
-    "disponible": false
-  },
-  {
-    "id": 4,
-    "name": "Calamardo",
-    "shortDesc": "Dicen que de noche, cuando nadie lo puede escuchar, invoca a Cthulu. Muy mimoso.",
-    "longDesc": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit libero dolorum aliquam error expedita distinctio porro ducimus ex repellendus laboriosam. Sequi, doloribus autem? Unde commodi assumenda consequatur ratione numquam distinctio nihil blanditiis quae debitis sed eligendi modi architecto omnis aspernatur officia molestiae, vero nemo a quibusdam? Voluptatum eveniet blanditiis impedit.",
-    "img": "https://misanimales.com/wp-content/uploads/2018/07/mito-del-gato-negro.jpg",
-    "colores": ["negro"],
-    "sexo": "m",
+    "img": "",
+    "colores": ["negra"],
+    "sexo": "f",
     "disponible": true
   }
 ]
