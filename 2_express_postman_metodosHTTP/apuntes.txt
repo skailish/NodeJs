@@ -1,0 +1,55 @@
+Cuando nos comunicamos con un servidor, se nos devuelve un apodo de la ip del servidor, seguido por dos puntos y un número que representa un recurso específico
+por ejemplo:
+cuando utilizamos react de forma local
+localhost:3000
+localhost es el apodo de nuestro ip: 127.0.0.1
+:3000 es el recurso de react para poder ejecturarlo
+
+===============
+Petición TCP/IP
+===============
+Una vez que está establecida, se utilizan métodos HTTP para manejar información
+Sintaxis:
+--- Petición:
+GET /maps HTTP/1.1
+Host: www.google.comunicamosUser-Agent: Mozilla/5.0
+Accept-Language: en-comunicamosUser
+GET: pedir información
+POST: pedir información
+
+--- Respuesta:
+HTTP/1.1 200 OK
+Content-type: text/html
+Transfer-Encoding: chunked
+
+===================
+Qué es un servidor?
+===================
+Servidores estáticos: No usan lógica, solo nos dan archivos. Reciben un request, responden con un archivo.
+Servidores dinámicos: Implican algo de lógica del lado del servidor.
+Client side rendering:
+Petición del cliente -> bd servidor -> respuesta JSON -> cliente trabaja con la info
+Server side rendering:
+Petición del cliente -> base de datos -> template -> servidor trabaja con la info
+
+
+========
+LIBRERÍA
+========
+Colección de funciones, que podemos elegir utilizar o no
+
+=========
+FRAMEWORK
+=========
+Colección de funciones, que tienen "normas", nos fuerza a hacer las cosas de cierta manera específica, para utilizarlo.
+
+
+
+==================
+API RESTFUL
+==================
+Los recursos en nuestra api deben estar disponibles en endpoints específicos de nuestra url
+wwwadsasd.com/gatitos   /1
+url          /ENPOINT   ?id=1
+
+La url siempre se debe referir a un recurso y no a una acción

@@ -1,0 +1,34 @@
+const express = require("express");
+
+// app: Variable que corre la función express
+const app = express();
+
+// Cuál es el método que va a ecuchar esta aplicación y en qué ruta? Como segundo parámetro, un callback, que lleva como parámetros la petición y la respuesta (qué hace cuando termina el proceso)
+app.get("/", (req, res) => {
+  // Cuando envío una respuesta, termina mi petición (send)
+  //   res.send("Hola desde Express");
+
+  // También puedo mandar un objeto
+  res.json({
+    Estado: "Tu pedido fue exitoso",
+  });
+});
+
+app.post("/", (req, res) => {
+  // Cuando envío una respuesta, termina mi petición (send)
+  res.send("Me hiciste un post!");
+});
+
+app.post("/hola", (req, res) => {
+  // Cuando envío una respuesta, termina mi petición (send)
+  res.send("Me hiciste un post en la ruta /hola!");
+});
+
+// Determino un puerto
+const port = 8080;
+
+// La variable app va a escuchar a nuestro puerto
+app.listen(port, () => {
+  console.log(`App corriendo en puerto ${port}`);
+});
+
