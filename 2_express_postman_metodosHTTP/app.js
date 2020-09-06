@@ -90,7 +90,6 @@ app.put("/gatitos", (req, res) => {
       return gato;
     });
     // Ahora actualizo la data
-
     fs.writeFile(
       `${__dirname}/assets/cats.json`,
       JSON.stringify(newJson),
@@ -100,7 +99,6 @@ app.put("/gatitos", (req, res) => {
           status: "success",
           data: {
             newJson,
-            editedAt: new Date(),
           },
         });
       }
