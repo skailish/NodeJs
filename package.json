@@ -1,8 +1,8 @@
 {
   "name": "2_postman",
   "version": "1.0.0",
-  "description": "Segunda clase de NODE.Js",
-  "main": "index.js",
+  "description": "Api de refugios de gatitos",
+  "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +10,8 @@
   "author": "Daniela",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

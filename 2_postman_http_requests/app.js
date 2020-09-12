@@ -12,7 +12,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/gatitos", (req, res) => {
-  fs.readFile(`${__dirname}/assets/cats.json`, (err, data) => {
+  fs.readFile(`./assets/cats.json`, (err, data) => {
     const dataJSON = JSON.parse(data);
     res.json({
       status: "Success",
@@ -22,10 +22,8 @@ app.get("/gatitos", (req, res) => {
 });
 
 app.get("/gatitos/:id", (req, res) => {
-  // obtener los parámetros que indicó el usuario
-  console.log(req.params);
   // Recibir una petición
-  fs.readFile(`${__dirname}/assets/cats.json`, (err, data) => {
+  fs.readFile(`./assets/cats.json`, (err, data) => {
     if (err) {
       return res.status(500).json({
         status: "error",
@@ -51,7 +49,7 @@ app.get("/gatitos/:id", (req, res) => {
 // Agregar algo a mi api
 app.post("/gatitos", (req, res) => {
   // Primero determino toda la info a agregar
-  fs.readFile(`${__dirname}/assets/cats.json`, (err, data) => {
+  fs.readFile(`./assets/cats.json`, (err, data) => {
     //   Obtengo lo que ya existe
     const dataJSON = JSON.parse(data);
     // Asigno a una variable lo que envía el post
@@ -61,27 +59,23 @@ app.post("/gatitos", (req, res) => {
     //   Le sumo mi nuevoGato a lo que ya tengo
     dataJSON.push(nuevoGato);
     // Ahora agrego la data
-    fs.writeFile(
-      `${__dirname}/assets/cats.json`,
-      JSON.stringify(dataJSON),
-      (err) => {
-        // Éxito al grabar? 201
-        res.status(201).json({
-          status: "success",
-          data: {
-            nuevoGato,
-            createdAt: new Date(),
-          },
-        });
-      }
-    );
+    fs.writeFile(`./assets/cats.json`, JSON.stringify(dataJSON), (err) => {
+      // Éxito al grabar? 201
+      res.status(201).json({
+        status: "success",
+        data: {
+          nuevoGato,
+          createdAt: new Date(),
+        },
+      });
+    });
   });
 });
 
 // PUT y DELETE
 // -> PUT
 app.put("/gatitos", (req, res) => {
-  fs.readFile(`${__dirname}/assets/cats.json`, (err, data) => {
+  fs.readFile(`./assets/cats.json`, (err, data) => {
     const dataJSON = JSON.parse(data);
     const gatoEditado = req.body;
 
@@ -90,33 +84,29 @@ app.put("/gatitos", (req, res) => {
       return gato;
     });
     // Ahora actualizo la data
-    fs.writeFile(
-      `${__dirname}/assets/cats.json`,
-      JSON.stringify(newJson),
-      (err) => {
-        // Éxito al grabar? 201
-        res.status(201).json({
-          status: "success",
-          data: {
-            newJson,
-          },
-        });
-      }
-    );
+    fs.writeFile(`./assets/cats.json`, JSON.stringify(newJson), (err) => {
+      // Éxito al grabar? 201
+      res.status(201).json({
+        status: "success",
+        data: {
+          newJson,
+        },
+      });
+    });
   });
 });
 
 // -> DELETE
 app.delete("/gatitos/:id", (req, res) => {
   const id = Number(req.params.id);
-  fs.readFile(`${__dirname}/assets/cats.json`, (err, data) => {
+  fs.readFile(`./assets/cats.json`, (err, data) => {
     const dataJSON = JSON.parse(data);
     const gatoNombre = dataJSON[id].name;
     const resultadoFiltrado = dataJSON.filter((gato) => gato.id !== id);
 
     // Ahora actualizo la data
     fs.writeFile(
-      `${__dirname}/assets/cats.json`,
+      `./assets/cats.json`,
       JSON.stringify(resultadoFiltrado),
       (err) => {
         res.status(201).send(`Borraste al gatito ${gatoNombre}, cuánta maldad`);

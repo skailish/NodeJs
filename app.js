@@ -1,5 +1,4 @@
 const express = require("express");
-const fs = require("fs");
 const morgan = require("morgan");
 const app = express();
 const userRouter = require("./routes/userRoutes");
@@ -25,7 +24,7 @@ app.use((req, res, next) => {
 
 app.use("/users", userRouter);
 app.use("/gatitos", gatitoRouter);
-app.use("/refugio", refugioRouter);
+app.use("/refugios", refugioRouter);
 
 // Determino un puerto
 const port = 8080;
