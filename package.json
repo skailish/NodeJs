@@ -1,10 +1,10 @@
 {
-  "name": "2_postman",
+  "name": "refugio_gatitos",
   "version": "1.0.0",
   "description": "Api de refugios de gatitos",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Daniela",
