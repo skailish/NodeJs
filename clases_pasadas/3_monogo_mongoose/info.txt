@@ -1,0 +1,29 @@
+// Defino un esquema o modelo con el método Schema
+const gatitosSchema = new mongoose.Schema({
+  nombre: {
+    type: String,
+    required: true,
+  },
+  edad: Number,
+  colores: {
+    type: Array,
+    required: true,
+  },
+  disponible: {
+    type: Boolean,
+    default: false,
+  },
+});
+// Creo un nuevo modelo basado en ese esquema
+const Gatito = mongoose.model("Gatito", gatitosSchema, "gatitos");
+
+const gatito = new Gatito({
+  nombre: "Gatito 1",
+  edad: 12,
+  disponible: true,
+});
+
+gatito
+  .save()
+  .then((doc) => console.log(doc))
+  .catch((err) => console.log(err));

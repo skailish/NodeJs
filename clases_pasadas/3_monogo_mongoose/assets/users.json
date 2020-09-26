@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "usuario 1",
+    "shortDesc": "Es un usuario.",
+    "longDesc": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit libero dolorum aliquam error expedita distinctio porro ducimus ex repellendus laboriosam. Sequi, doloribus autem? Unde commodi assumenda consequatur ratione numquam distinctio nihil blanditiis quae debitis sed eligendi modi architecto omnis aspernatur officia molestiae, vero nemo a quibusdam? Voluptatum eveniet blanditiis impedit.",
+    "img": "",
+    "disponible": true
+  },
+  {
+    "id": 2,
+    "name": "usuario 2",
+    "shortDesc": "Es un usuario.",
+    "longDesc": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit libero dolorum aliquam error expedita distinctio porro ducimus ex repellendus laboriosam. Sequi, doloribus autem? Unde commodi assumenda consequatur ratione numquam distinctio nihil blanditiis quae debitis sed eligendi modi architecto omnis aspernatur officia molestiae, vero nemo a quibusdam? Voluptatum eveniet blanditiis impedit.",
+    "img": "",
+    "disponible": true
+  },
+  {
+    "id": 3,
+    "name": "usuario 3",
+    "shortDesc": "Es un usuario.",
+    "longDesc": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit libero dolorum aliquam error expedita distinctio porro ducimus ex repellendus laboriosam. Sequi, doloribus autem? Unde commodi assumenda consequatur ratione numquam distinctio nihil blanditiis quae debitis sed eligendi modi architecto omnis aspernatur officia molestiae, vero nemo a quibusdam? Voluptatum eveniet blanditiis impedit.",
+    "img": "",
+    "disponible": true
+  }
+]

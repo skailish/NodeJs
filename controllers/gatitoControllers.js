@@ -1,118 +1,124 @@
 const fs = require("fs");
+const Gatito = require("../models/gatitos");
 
-const getGatitos = (req, res) => {
-  fs.readFile(`./assets/cats.json`, (err, data) => {
-    const dataJSON = JSON.parse(data);
-    res.json({
-      requestedAt: req.requestedAt,
+const getGatitos = async (req, res) => {
+  try {
+    const gatitos = await Gatito.find();
+    res.status(201).json({
       status: "success",
-      data: dataJSON,
+      data: gatitos,
     });
-    if (err) {
-      res.sendStatus(500).send("Algo anda mal");
-    }
-  });
-};
-
-const getGatito = (req, res) => {
-  const id = Number(req.params.id);
-  fs.readFile(`./assets/cats.json`, (err, data) => {
-    if (err) {
-      return res.status(500).json({
-        status: "error",
-        message: "Ocurrió un error",
-      });
-    }
-    const dataJson = JSON.parse(data);
-    const gatito = dataJson[id];
-    if (!gatito) {
-      return res.status(404).json({
-        requestedAt: req.requestedAt,
-        status: "fail",
-        message: "Gato no encontrado",
-      });
-    }
-    res.json({
-      status: "Success",
-      data: gatito,
-    });
-  });
-};
-
-const postGatito = (req, res) => {
-  const nuevoGato = req.body;
-  if (nuevoGato) {
-    fs.readFile(`./assets/cats.json`, (err, data) => {
-      const dataJSON = JSON.parse(data);
-      nuevoGato.id = dataJSON.length;
-      dataJSON.push(nuevoGato);
-      fs.writeFile(`./assets/cats.json`, JSON.stringify(dataJSON), (err) => {
-        res.status(201).json({
-          status: "success",
-          data: {
-            nuevoGato,
-            createdAt: new Date(),
-          },
-        });
-      });
+  } catch (error) {
+    res.status(400).json({
+      status: "error",
+      message: error,
     });
   }
 };
 
-const putGatito = (req, res) => {
-  fs.readFile(`./assets/cats.json`, (err, data) => {
-    const dataJSON = JSON.parse(data);
-    const idGatitoAEditar = Number(req.params.id);
-    const gatoEditado = req.body;
-    let gatoEncontrado = dataJSON.find((gato) => gato.id === idGatitoAEditar);
+const getGatito = async (req, res) => {
+  try {
+    const gatito = await Gatito.findOne({
+      _id: req.params.id,
+    });
+    res.status(201).json({
+      status: "success",
+      data: gatito,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "error",
+      message: error,
+    });
+  }
+};
 
-    if (gatoEncontrado) {
-      let gatoActualizado = {
-        id: gatoEncontrado.id,
-        name: gatoEditado.name,
-        shortDesc: gatoEditado.shortDesc,
-        longDesc: gatoEditado.longDesc,
-        img: gatoEditado.img,
-        colores: gatoEditado.colores,
-        sexo: gatoEditado.sexo,
-        disponible: gatoEditado.disponible,
-      };
-      let targetIndex = dataJSON.indexOf(gatoEncontrado);
-      dataJSON.splice(targetIndex, 1, gatoActualizado);
-
-      fs.writeFile(`./assets/cats.json`, JSON.stringify(dataJSON), (err) => {
-        res.status(201).json({
-          status: "success",
-          data: dataJSON,
-        });
+const postGatito = async (req, res) => {
+  try {
+    if (!req.body.nombre) {
+      return res.status(400).json({
+        status: "fail",
+        err: "Nombre es un campo requerido",
       });
-    } else {
-      res.sendStatus(404);
     }
-  });
+    const nuevoGato = await Gatito.create(req.body);
+    res.status(201).json({
+      status: "success",
+      data: {
+        nuevoGato,
+        createdAt: new Date(),
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      err: err,
+    });
+  }
 };
 
-const deleteGatito = (req, res) => {
-  fs.readFile(`./assets/cats.json`, (err, data) => {
-    const dataJSON = JSON.parse(data);
-    const id = Number(req.params.id);
-
-    const gatoNombre = dataJSON[id].name;
-    const arrGatitosFiltrado = dataJSON.filter((gato) => gato.id !== id);
-
-    fs.writeFile(
-      `./assets/cats.json`,
-      JSON.stringify(arrGatitosFiltrado),
-      (err) => {
-        res.status(202).json({
-          requestedAt: req.requestedAt,
-          status: "success",
-          message: `Borraste al gatito ${gatoNombre}, cuánta maldad`,
-          data: arrGatitosFiltrado,
-        });
-      }
+const putGatito = async (req, res) => {
+  try {
+    await Gatito.replaceOne(
+      {
+        _id: req.params.id,
+      },
+      req.body
     );
-  });
+    res.status(201).json({
+      status: "success",
+      data: req.body,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "error",
+      message: error,
+    });
+  }
 };
 
-module.exports = { getGatito, getGatitos, postGatito, deleteGatito, putGatito };
+const patchGatito = async (req, res) => {
+  try {
+    await Gatito.findByIdAndUpdate(
+      {
+        _id: req.params.id,
+      },
+      req.body
+    );
+    res.status(201).json({
+      status: "success",
+      data: req.body,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "error",
+      message: error,
+    });
+  }
+};
+
+const deleteGatito = async (req, res) => {
+  try {
+    await Gatito.deleteOne({
+      _id: req.params.id,
+    });
+    res.status(200).json({
+      status: "success",
+      data: null,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: error,
+    });
+  }
+};
+
+module.exports = {
+  getGatito,
+  getGatitos,
+  postGatito,
+  deleteGatito,
+  putGatito,
+  patchGatito,
+};
